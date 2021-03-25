@@ -1,5 +1,5 @@
 var track,carImg,obstacleImg;
-var backgroundImg,car,obstacle;
+var bgImg,car,obstacle;
 var gameState="play";
 
 function preload() {
@@ -17,14 +17,15 @@ function setup() {
 
   //creating sprites
 
- backgroundImg=createSprite(0,-displayHeight*4,displayWidth,displayHeight*5);
- backgroundImg.addImage(track);
+ bgImg=createSprite(0,-displayHeight*4,displayWidth,displayHeight*5);
+ bgImg.addImage(track);
 
- obstacle=createSprite(random(0,displayWidth-20),random(300,500),30,30);
+ obstacle=createSprite(random(150,600),random(300,500),30,30);
  obstacle.addImage(obstacleImg);
 
  car=createSprite(displayWidth-20/2,displayHeight-30/2,50,50);
  car.addImage(carImg);
+
 
  // console.log(displayHeight)
  }
@@ -35,27 +36,35 @@ function draw() {
  //making car move with arrow keys
 if(gameState==="play"){
  if(keyDown(LEFT_ARROW)){
-    car.x=car.x-1;
+    car.x=car.x-10;
  }
 if(keyDown(RIGHT_ARROW)){
-  car.x=car.x+1;
+  car.x=car.x+10;
 }
 if(keyDown(UP_ARROW)){
-  car.y=car.y-1;
+  car.y=car.y-10;
 }
 }
+
+car.setCollider("rectangle",0,100,250,250);
 
 //if the car hits the obstacle game is over  
-if(car.x===obstacle.x && car.y===obstacle.y){
-  textSize(20);
-  fill("white");
-  text("GAME OVER",displayWidth-20/2,displayHeight-30/2);
-  gameState="end";
-}
+if(car.isTouching(obstacle)){ 
+  car.destroy();
+  obstacle.destroy(); 
+  gameState="end"; } 
 
-//setting camera directions
+  //setting camera directions
 camera.position.x = displayWidth-20/2;
 camera.position.y = car.y;
+
+if(gameState==="end"){
+  textSize(40);
+  fill("white");
+  stroke("black");
+  strokeWeight(8);
+  text("GAMEOVER!!!!",600,600);
+}
 
   drawSprites();
 }
