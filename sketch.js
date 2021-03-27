@@ -17,7 +17,7 @@ function setup() {
 
   //creating sprites
 
- bgImg=createSprite(0,-displayHeight*4,displayWidth,displayHeight*5);
+ bgImg=createSprite(displayWidth,displayHeight);
  bgImg.addImage(track);
 
  obstacle=createSprite(random(150,600),random(300,500),30,30);
@@ -25,7 +25,7 @@ function setup() {
 
  car=createSprite(displayWidth-20/2,displayHeight-30/2,50,50);
  car.addImage(carImg);
-
+ car.setCollider("rectangle",0,100,250,250);
 
  // console.log(displayHeight)
  }
@@ -46,8 +46,6 @@ if(keyDown(UP_ARROW)){
 }
 }
 
-car.setCollider("rectangle",0,100,250,250);
-
 //if the car hits the obstacle game is over  
 if(car.isTouching(obstacle)){ 
   car.destroy();
@@ -60,10 +58,10 @@ camera.position.y = car.y;
 
 if(gameState==="end"){
   textSize(40);
-  fill("white");
+  fill("white")
   stroke("black");
   strokeWeight(8);
-  text("GAMEOVER!!!!",600,600);
+  text("GAMEOVER!!!!",650,600);
 }
 
   drawSprites();
