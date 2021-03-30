@@ -6,7 +6,7 @@ function preload() {
 
   //preloading images
 
- track=loadImage("images/track.png");
+ track=loadImage("images/track.jpg");
  obstacleImg=loadImage("images/stone.png");
  carImg=loadImage("images/racing car.png");
   
@@ -16,9 +16,6 @@ function setup() {
   createCanvas(displayWidth-20,displayHeight-30);
 
   //creating sprites
-
- bgImg=createSprite(displayWidth,displayHeight);
- bgImg.addImage(track);
 
  obstacle=createSprite(random(150,600),random(300,500),30,30);
  obstacle.addImage(obstacleImg);
@@ -32,6 +29,7 @@ function setup() {
 
 function draw() {
  background(rgb(198,135,103));
+ image(track, 550,-displayHeight*4,displayWidth, displayHeight*5);
 
  //making car move with arrow keys
 if(gameState==="play"){
