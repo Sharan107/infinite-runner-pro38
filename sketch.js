@@ -41,7 +41,7 @@ if(keyDown(RIGHT_ARROW)){
 if(keyDown(UP_ARROW)){
   car.y=car.y-10;
 }
-}
+
 
 if(frameCount%200==0){ 
   obstacle=createSprite(random(800,1300),camera.position.y-250,30,30);
@@ -60,6 +60,7 @@ if(car.isTouching(obstacleGroup)){
    strokeWeight(8);
    text("GAMEOVER!!!!",650,600);
   }
+}
 
   //setting camera directions
 camera.position.x = displayWidth-20/2;
