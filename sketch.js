@@ -58,22 +58,25 @@ if(car.isTouching(obstacleGroup)){
    fill("white")
    stroke("black");
    strokeWeight(8);
-   text("GAMEOVER!!!!",650,600);
+   text("GAMEOVER!!!!",displayWidth,camera.position.y);
   }
-}
+
 
   //setting camera directions
 camera.position.x = displayWidth-20/2;
 camera.position.y = car.y;
 
-if(car.y>=3050){
-  gameState="end";
-  textSize(40);
-  fill("white")
-  stroke("black");
-  strokeWeight(8);
-  text("YOU WIN",650,700);
+if(car.y<=-3050){
+  gameState="end"; 
+  background("black"); 
+  textSize(40); 
+  fill("white"); 
+  stroke("black"); 
+  strokeWeight(8); 
+  car.destroy(); 
+  obstacleGroup.destroyEach(); 
+  text("YOU WIN",displayWidth,camera.position.y); 
 }
-
+}
 drawSprites();
 }
