@@ -1,6 +1,7 @@
 var track,carImg,obstacleImg;
 var bgImg,car,obstacle,obstacleGroup;
 var gameState="play";
+var finish=false;
 
 function preload() {
 
@@ -51,14 +52,8 @@ if(frameCount%200==0){
 
 //if the car hits the obstacle game is over  
 if(car.isTouching(obstacleGroup)){
-   car.destroy(); 
-   obstacleGroup.destroyEach(); 
-   gameState="end"; 
-   textSize(40);
-   fill("white")
-   stroke("black");
-   strokeWeight(8);
-   text("GAMEOVER!!!!",displayWidth,camera.position.y);
+  gameState="end";
+   
   }
 
 
@@ -67,16 +62,29 @@ camera.position.x = displayWidth-20/2;
 camera.position.y = car.y;
 
 if(car.y<=-3050){
-  gameState="end"; 
-  background("black"); 
-  textSize(40); 
-  fill("white"); 
-  stroke("black"); 
-  strokeWeight(8); 
-  car.destroy(); 
-  obstacleGroup.destroyEach(); 
+   finish=true;
+   gameState="end";
+}
+}
+
+if(gameState==="end"){
+ car.destroy(); 
+ obstacleGroup.destroyEach(); 
+ background("black");
+ textSize(40);
+ fill("black")
+ stroke("white");
+ strokeWeight(4);
+ 
+if(finish==true){
+  //background("black"); 
+ 
   text("YOU WIN",displayWidth,camera.position.y); 
 }
+else{
+  text("GAMEOVER!!!!",displayWidth-20/2,camera.position.y);
 }
+}
+
 drawSprites();
 }
